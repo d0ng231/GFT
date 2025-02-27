@@ -14,42 +14,13 @@ def load_local_model(model_path):
     FastVisionModel.for_inference(model)
     return model, tokenizer
 
-# def clean_model_output(output):
-#     lines = output.strip().split('\n')
-#     if lines:
-#         first_line = lines[0].strip()
-#         match = re.match(r'^\s*Prediction:\s*(Healthy|NPDR|PDR)\s*$', first_line, re.IGNORECASE)
-#         if match:
-#             return match.group(1).capitalize()
-    
-#     output = output.lower()
-#     patterns = {
-#         r'(?:^|\W)healthy(?:\W|$)': 'Healthy',
-#         r'(?:^|\W)pdr(?:\W|$)': 'PDR',
-#         r'(?:^|\W)npdr(?:\W|$)': 'NPDR',
-#         r'non-proliferative diabetic retinopathy': 'NPDR',
-#         r'proliferative diabetic retinopathy': 'PDR'
-#     }
-    
-#     for pattern, label in patterns.items():
-#         if re.search(pattern, output):
-#             return label
-#     return None
-
 def clean_model_output(output):
-    """
-    从输出文本中提取第一个出现的预测标签，返回标准格式的标签。
-    识别的标签包括：Healthy, NPDR, PDR。
-    支持匹配短形式（如 "healthy", "npdr", "pdr"）以及长形式
-    （如 "non-proliferative diabetic retinopathy", "proliferative diabetic retinopathy"）。
-    """
+
     output_lower = output.lower()
-    # 使用一个正则表达式匹配所有可能的形式
     pattern = r'\b(healthy|npdr|pdr|non[-\s]?proliferative diabetic retinopathy|proliferative diabetic retinopathy)\b'
     match = re.search(pattern, output_lower, re.IGNORECASE)
     if match:
         found = match.group(1)
-        # 根据匹配内容返回对应的标准标签
         if found.startswith("healthy"):
             return "Healthy"
         elif found.startswith("npdr") or found.startswith("non"):
@@ -382,9 +353,7 @@ def evaluate_model(model_path, images_dir, label_dir):
 
 if __name__ == "__main__":
     evaluate_model(
-        model_path="/home/cl2733/unsloth/checkpoints/llama_3.2_11b_split_2_128_stage2", #unsloth/Llama-3.2-11B-Vision-Instruct unsloth/Llama-3.2-90B-Vision-Instruct-bnb-4bit
-        images_dir="/home/cl2733/LLaVA/playground/data/DCP_images",
-        label_dir="/home/cl2733/unsloth/data/csv_exp_samples"
+        model_path="/checkpoints/llama_3.2_11b_split_2_128_stage2", #unsloth/Llama-3.2-11B-Vision-Instruct unsloth/Llama-3.2-90B-Vision-Instruct-bnb-4bit
+        images_dir="/data/DCP_images",
+        label_dir="/data/csv_exp_samples"
     )
-#    unsloth/Llama-3.2-11B-Vision-bnb-4bit
-    #        model_path="/home/cl2733/unsloth/checkpoints/llama_3.2_11b_396_class_v12_4", #unsloth/Llama-3.2-11B-Vision-Instruct

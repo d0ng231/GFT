@@ -79,7 +79,7 @@ def run_text_inference(model, tokenizer, prompt: str, max_retries: int = 5):
     return ""
 
 # Load the model once at startup
-MODEL_PATH = "/home/cl2733/unsloth/checkpoints/llama_3.2_11b_split_2_128_stage2"
+MODEL_PATH = "/checkpoints/llama_3.2_11b_split_2_128_stage2"
 model, tokenizer = load_local_model(MODEL_PATH)
 
 def inference_interface(image, prompt, history):

@@ -2,21 +2,6 @@ import torch
 # FastVisionModel is the main class for handling vision+language tasks
 from unsloth import FastVisionModel
 
-# 4bit pre-quantized models supported to reduce OOM issues and download time.
-fourbit_models = [
-    "unsloth/Llama-3.2-11B-Vision-Instruct-bnb-4bit",  # Llama 3.2 vision support
-    "unsloth/Llama-3.2-11B-Vision-bnb-4bit",
-    "unsloth/Llama-3.2-90B-Vision-Instruct-bnb-4bit",  # Fits on 80GB GPU
-    "unsloth/Llama-3.2-90B-Vision-bnb-4bit",
-    "unsloth/Pixtral-12B-2409-bnb-4bit",               # Fits on 16GB
-    "unsloth/Pixtral-12B-Base-2409-bnb-4bit",
-    "unsloth/Qwen2-VL-2B-Instruct-bnb-4bit",           # Qwen2 VL support
-    "unsloth/Qwen2-VL-7B-Instruct-bnb-4bit",
-    "unsloth/Qwen2-VL-72B-Instruct-bnb-4bit",
-    "unsloth/llava-v1.6-mistral-7b-hf-bnb-4bit",       # Llava variants
-    "unsloth/llava-1.5-7b-hf-bnb-4bit",
-]
-
 # Instantiate the model in 4-bit mode and enable gradient checkpointing.
 model, tokenizer = FastVisionModel.from_pretrained(
     "/home/cl2733/unsloth/checkpoints/llama_3.2_11b_class_only_split_2_128",
@@ -46,8 +31,8 @@ def enable_peft(model):
     )
     return model
 
-def prepare_dataset(jsonl_path="/home/cl2733/unsloth/data/Finetune_v18_aug.json",
-                    images_dir="/home/cl2733/LLaVA/playground/data/DCP_images"):
+def prepare_dataset(jsonl_path="/data/Finetune_v18_aug.json",
+                    images_dir="/data/DCP_images"):
     import json
     from PIL import Image
     
@@ -171,8 +156,8 @@ def train_model(model, tokenizer, converted_dataset):
     )
     trainer.train()
 
-    model.save_pretrained("/home/cl2733/unsloth/checkpoints/llama_3.2_11b_split_2_128_stage2")
-    tokenizer.save_pretrained("/home/cl2733/unsloth/checkpoints/llama_3.2_11b_split_2_128_stage2")
+    model.save_pretrained("/checkpoints/llama_3.2_11b_split_2_128_stage2")
+    tokenizer.save_pretrained("/checkpoints/llama_3.2_11b_split_2_128_stage2")
 
 
 # Example usage in this script
