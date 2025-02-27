@@ -4,7 +4,7 @@ from unsloth import FastVisionModel
 
 # Instantiate the model in 4-bit mode and enable gradient checkpointing.
 model, tokenizer = FastVisionModel.from_pretrained(
-    "/home/cl2733/unsloth/checkpoints/llama_3.2_11b_class_only_split_2_128",
+    "/checkpoints/llama_3.2_11b_class_only_split_2_128",
     load_in_4bit=False,              # Use 4bit to reduce memory usage
     use_gradient_checkpointing="unsloth",  # "True" or "unsloth" for long context
 )
