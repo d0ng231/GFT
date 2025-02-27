@@ -31,36 +31,36 @@ def clean_model_output(output):
 
 def run_inference(model, tokenizer, image_path, max_retries=5):
     structured_prompt = (
-        "Analyze this deep capillary plexus (DCP) image imaged by optical coherence tomography angiography (OCTA). First state your prediction exactly as one of the three classes: "
+        "Analyze this deep capillary plexus (DVC) image imaged by optical coherence tomography angiography (OCTA). First state your prediction exactly as one of the three classes: "
         "'Healthy', 'NPDR', or 'PDR'. "
         "Then provide your reasoning."
 
-        "Here's the explanation with specific visual characteristics observed on OCTA DCP images for healthy, NPDR, and PDR retinas:\n"
+        "Here's the explanation with specific visual characteristics observed on OCTA DVC images for healthy, NPDR, and PDR retinas:\n"
 
         "Healthy Retina \n"
-        "* Vascular Structure: The DCP displays a dense and continuous network of small capillaries forming an intricate lattice-like pattern. The vessels are well-distributed and show no interruptions.\n"
+        "* Vascular Structure: The DVC displays a dense and continuous network of small capillaries forming an intricate lattice-like pattern. The vessels are well-distributed and show no interruptions.\n"
         "* Foveal Avascular Zone (FAZ): This central region is a clear, well-defined circular or oval-shaped area devoid of blood vessels. The edges of the FAZ are smooth and regular.\n"
         "* Flow Signals: Blood flow in vessels is continuous and homogeneous, with no gaps or flow voids. The choriocapillaris beneath the retina also shows a dense and uniform flow pattern.\n"
 
         "Non-Proliferative Diabetic Retinopathy (NPDR)\n"
-        "* Bright, rounded dots scattered across the DCP network. These microaneurysms are localized areas of vessel wall weakening or dilation and can be one of the earliest detectable abnormalities in NPDR. \n"
+        "* Bright, rounded dots scattered across the DVC network. These microaneurysms are localized areas of vessel wall weakening or dilation and can be one of the earliest detectable abnormalities in NPDR. \n"
         "* Capillary Dropout: Seen as dark, irregular patches where the capillary network is disrupted and blood flow is absent.\n"
-        "* FAZ Enlargement: The FAZ in the DCP becomes noticeably larger and less circular, with jagged and uneven borders. This enlargement is an indicator of early ischemic damage.\n"
+        "* FAZ Enlargement: The FAZ in the DVC becomes noticeably larger and less circular, with jagged and uneven borders. This enlargement is an indicator of early ischemic damage.\n"
         "* Vessel Tortuosity and Dilation: Blood vessels become more tortuous and uneven in thickness. Some vessels may appear dilated and malformed.\n"
-        "* Reduced Vascular Density (VD): The DCP shows thinning and reduced capillary density, particularly in the parafoveal region, resulting in a patchy appearance\n"
+        "* Reduced Vascular Density (VD): The DVC shows thinning and reduced capillary density, particularly in the parafoveal region, resulting in a patchy appearance\n"
 
         "Proliferative Diabetic Retinopathy (PDR)\n"
-        "* Neovascularization: Though less common in the DCP, abnormal clusters of fine, disorganized vessels can sometimes be detected extending deeper into this layer. These vessels appear chaotic and lack the uniformity of healthy capillary network\n"
-        "* Capillary Non-Perfusion: Large, well-defined regions of absent flow dominate the DCP in advanced PDR. These ischemic zones appear as extensive dark patches, often surrounding the enlarged FAZ.\n"
+        "* Neovascularization: Though less common in the DVC, abnormal clusters of fine, disorganized vessels can sometimes be detected extending deeper into this layer. These vessels appear chaotic and lack the uniformity of healthy capillary network\n"
+        "* Capillary Non-Perfusion: Large, well-defined regions of absent flow dominate the DVC in advanced PDR. These ischemic zones appear as extensive dark patches, often surrounding the enlarged FAZ.\n"
         "* FAZ Expansion and Irregularity: The FAZ becomes significantly larger and more distorted, often losing its defined circular or oval shape entirely.\n"
-        "* Flow Voids: Beyond the ischemic zones, smaller scattered flow voids may appear throughout the DCP, disrupting the capillary continuity and contributing to the overall reduction in VD.\n"
+        "* Flow Voids: Beyond the ischemic zones, smaller scattered flow voids may appear throughout the DVC, disrupting the capillary continuity and contributing to the overall reduction in VD.\n"
 
-        "Distinguishing Features Between NPDR and PDR in DCP \n"
+        "Distinguishing Features Between NPDR and PDR in DVC \n"
         "Neovascularization:\n"
-        "NPDR: Lacks neovascularization in the DCP.\n"
+        "NPDR: Lacks neovascularization in the DVC.\n"
         "PDR: Displays disorganized, abnormal vessel clusters extending beyond the usual vascular layers.\n"
         "Capillary Non-Perfusion:\n"
-        "NPDR: Smaller and patchy non-perfused regions in the DCP.\n"
+        "NPDR: Smaller and patchy non-perfused regions in the DVC.\n"
         "PDR: Larger, confluent areas of capillary dropout, especially in the peripheral retina.\n"
         "FAZ Changes:\n"
         "NPDR: Mild to moderate enlargement with jagged borders.\n"
@@ -71,15 +71,15 @@ def run_inference(model, tokenizer, image_path, max_retries=5):
     )
 
     simple_prompt = (
-        "Classify the OCTA DCP image and answer with one word only: Healthy, NPDR, or PDR"
+        "Classify the OCTA DVC image and answer with one word only: Healthy, NPDR, or PDR"
     )
     
     simple_prompt_stage2 = (
-        "Classify the OCTA DCP image as: Healthy, NPDR, or PDR and explain why."
+        "Classify the OCTA DVC image as: Healthy, NPDR, or PDR and explain why."
     )
 
     Exp_q1 = (
-        "Answer in a paragraph. Is this OCTA DCP image suggesting a healthy, PDR or NPDR condition? Explain your prediction."
+        "Answer in a paragraph. Is this OCTA DVC image suggesting a healthy, PDR or NPDR condition? Explain your prediction."
     )
 
     Exp_q2 = (
@@ -354,6 +354,6 @@ def evaluate_model(model_path, images_dir, label_dir):
 if __name__ == "__main__":
     evaluate_model(
         model_path="/checkpoints/llama_3.2_11b_split_2_128_stage2", #unsloth/Llama-3.2-11B-Vision-Instruct unsloth/Llama-3.2-90B-Vision-Instruct-bnb-4bit
-        images_dir="/data/DCP_images",
+        images_dir="/data/DVC_images",
         label_dir="/data/csv_exp_samples"
     )

@@ -57,7 +57,7 @@ def prepare_dataset(images_dir, csv_dir, key="True Class"):
         user_content = [
             {
                 "type": "text",
-                "text": "Classify the OCTA DCP image and answer with one word only: Healthy, NPDR, or PDR."
+                "text": "Classify the OCTA image and answer with one word only: Healthy, NPDR, or PDR."
             },
             {
                 "type": "image",
@@ -131,10 +131,10 @@ def train_model(model, tokenizer, train_data, eval_data=None):
 
 if __name__ == "__main__":
 
-    train_images_dir = "/data/DCP_images"
+    train_images_dir = "/data/DVC_images"
     train_csv_dir = "/data/sub_dataset_1/train"
 
-    val_images_dir = "/data/DCP_images"
+    val_images_dir = "/data/DVC_images"
     val_csv_dir = "/data/sub_dataset_1/val"
     
     train_data = prepare_dataset(train_images_dir, train_csv_dir)

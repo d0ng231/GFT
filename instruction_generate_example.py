@@ -34,9 +34,9 @@ def parse_custom_csv(csv_path):
 
 def construct_promp_1(image_data, overlay_image_url, raw_image_url):
     system_content = (
-        "You are a retinal specialist creating teaching cases. The task is to prediction whether an OCTA DCP image suggests healthy, non-proliferate diabetic retinopathy (NPDR), or proliferate diabetic retinopathy (PDR).  Follow these rules:\n"
-        "1. Analyze BOTH raw OCTA deep capillary plexus (DCP) image and overlay image (with color-coded vessels) to triangulate findings\n"
-        "2. Describe features ONLY as visible on raw DCP, but use overlay to:\n"
+        "You are a retinal specialist creating teaching cases. The task is to prediction whether an OCTA DVC image suggests healthy, non-proliferate diabetic retinopathy (NPDR), or proliferate diabetic retinopathy (PDR).  Follow these rules:\n"
+        "1. Analyze BOTH raw OCTA deep capillary plexus (DVC) image and overlay image (with color-coded vessels) to triangulate findings\n"
+        "2. Describe features ONLY as visible on raw DVC, but use overlay to:\n"
         "   - Confirm abnormality locations\n"
         "   - Identify subtle flow variations\n"
         "3. Translate overlay colors to OCTA features:\n"
@@ -46,7 +46,7 @@ def construct_promp_1(image_data, overlay_image_url, raw_image_url):
         "4. Use 3-level localization:\n"
         "   a) Clock position from quadrant data\n"
         "   b) FAZ-relative distance\n"
-        "   c) Depth-specific features (DCP layer)"
+        "   c) Depth-specific features (DVC layer)"
     )
 
     overlay_guidance = (
@@ -142,7 +142,7 @@ def construct_promp_1(image_data, overlay_image_url, raw_image_url):
                  "Based on the ground truth condition given, generate 4 Q&A with these requirements:\n"
                 "1. FAZ Question:\n"
                 "   - Example: 'Describe the FAZ morphology and surrounding capillaries'\n"
-                "   - To answer the question, check Overlay and raw DCP for vessel patterns along the central FAZ region\n"
+                "   - To answer the question, check Overlay and raw DVC for vessel patterns along the central FAZ region\n"
 
                 "2. Perfusion Question:\n" 
                 "   - Example: 'Identify any areas of reduced perfusion\n"
@@ -150,7 +150,7 @@ def construct_promp_1(image_data, overlay_image_url, raw_image_url):
 
                 "3. Vascular Question:\n"
                 "   - Example: 'Note any abnormal vascular structures'\n"
-                "   - To answer the question,look for Microaneurysms and caliber variation on DCP image\n"
+                "   - To answer the question,look for Microaneurysms and caliber variation on DVC image\n"
 
                 "4. Final Question (Diagnosis):\n"
                 "   - Summarize and put together all observations\n"
@@ -168,7 +168,7 @@ def construct_promp_1(image_data, overlay_image_url, raw_image_url):
                 "   - Clock positions \n"
                 "   - FAZ-relative \n"
                 "   - Quadrant sector \n"
-                "5. Never refer to the color of the overlay or existing number in the prompt. ONLY use them to verify your findings on the raw DCP image!!!\n"
+                "5. Never refer to the color of the overlay or existing number in the prompt. ONLY use them to verify your findings on the raw DVC image!!!\n"
 
                 "Generate EXACTLY 4 Q&A pairs with STRICT format requirements:\n"
                 "1. Follow this pattern without deviation:\n"
@@ -190,8 +190,8 @@ def construct_promp_1(image_data, overlay_image_url, raw_image_url):
                 "- NEVER combine multiple questions in one User turn\n"
                 "- ALWAYS maintain alternating User/Assistant sequence\n"
                 
-                "Keep the answer short and concise, only mention the specific area/quadrant when you very sure the feature or pattern can be observed on the DCP image. Never mention the existence of the overlay, they are for teacher model's (your) reference only.\n"
-                "The following are the overlay image and raw DCP images, respectively."
+                "Keep the answer short and concise, only mention the specific area/quadrant when you very sure the feature or pattern can be observed on the DVC image. Never mention the existence of the overlay, they are for teacher model's (your) reference only.\n"
+                "The following are the overlay image and raw DVC images, respectively."
             )
         },
         {
