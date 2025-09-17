@@ -5,6 +5,19 @@
 
 This repo releases a clean, working reference for our MICCAI paper, including a minimal GNN pipeline, integrated-gradients attribution, instruction data synthesis, and two-stage VLM fine-tuning & demo. Please see [here](https://github.com/luxtu/OCTA-graph) for the complete pipeline of GNN training.
 
+## Citation
+
+If you find this work useful, please cite:
+
+```bibtex
+@article{li2025fine,
+  title={Fine-tuning Vision Language Models with Graph-based Knowledge for Explainable Medical Image Analysis},
+  author={Li, Chenjun and Lux, Laurin and Berger, Alexander H and Menten, Martin J and Sabuncu, Mert R and Paetzold, Johannes C},
+  journal={International Conference on Medical Image Computing and Computer-Assisted Intervention},
+  year={2025}
+}
+```
+
 > Data availability: The OCTA dataset used in our experiments is in-house and cannot be released. This repository does not include example images. Please prepare your own dataset (or a public OCT/OCTA dataset) and update the paths below accordingly.
 
 ## Figures
