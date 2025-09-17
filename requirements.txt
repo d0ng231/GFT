@@ -1,0 +1,16 @@
+# Core
+torch>=2.2
+torchvision>=0.17
+numpy>=1.26
+pillow
+pandas
+pyyaml
+tqdm
+
+# Optional but recommended
+captum         # for integrated gradients
+gradio         # demo UI
+unsloth        # for Llama 3.2 Vision finetuning
+trl
+peft
+transformers

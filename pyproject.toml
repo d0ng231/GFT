@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gft-explainable-octa"
+version = "0.1.0"
+description = "Graph-knowledge fine-tuning for explainable DR diagnosis on OCTA images"
+authors = [
+  { name="Chenjun Li" },
+  { name="Laurin Lux" },
+  { name="Alexander H. Berger" },
+  { name="Martin J. Menten" },
+  { name="Mert R. Sabuncu" },
+  { name="Johannes C. Paetzold" }
+]
+requires-python = ">=3.10"
+readme = "README.md"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["gft*"]

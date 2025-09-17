@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+title: "Fine-tuning Vision Language Models with Graph-based Knowledge for Explainable Medical Image Analysis"
+authors:
+  - family-names: Li
+    given-names: Chenjun
+  - family-names: Lux
+    given-names: Laurin
+  - family-names: Berger
+    given-names: Alexander H.
+  - family-names: Menten
+    given-names: Martin J.
+  - family-names: Sabuncu
+    given-names: Mert R.
+  - family-names: Paetzold
+    given-names: Johannes C.
+date-released: 2025-09-17
+version: "0.1.0"
