@@ -1,19 +1,26 @@
-# GFT: Graph-knowledge Fine-Tuning for Explainable DR Diagnosis (MICCAI 2025)
+# GFT: Fine-tuning Vision Language Models with Graph-based Knowledge for Explainable Medical Image Analysis (MICCAI 2025)
 
 > 🔎 **New:** our latest work on **trust-in-AI for DR diagnosis from OCTA** (survey).  
-> **[Link coming soon — add URL here]**
+> **[[Link](https://octa-dr.streamlit.app/)]**
 
-This repo releases a clean, working reference for our MICCAI paper, including a minimal GNN pipeline, integrated-gradients attribution, instruction data synthesis, and two-stage VLM fine-tuning & demo. The code favors clarity and reproducibility over flash.
+This repo releases a clean, working reference for our MICCAI paper, including a minimal GNN pipeline, integrated-gradients attribution, instruction data synthesis, and two-stage VLM fine-tuning & demo. Please see [here](https://github.com/luxtu/OCTA-graph) for the complete pipeline of GNN training.
 
-## Figures (placeholders)
-- **Figure 1. Method overview** — _Insert figure from paper here_
-- **Figure 2. Instruction data examples** — _Insert figure from paper here_
-- **Figure 3. Interpretability comparison** — _Insert figure from paper here_
+> Data availability: The OCTA dataset used in our experiments is in-house and cannot be released. This repository does not include example images. Please prepare your own dataset (or a public OCT/OCTA dataset) and update the paths below accordingly.
 
-## Highlights
-- Biology-informed graph → GNN staging → IG attribution → vision-language tuning
-- Two-stage finetuning script for Llama 3.2 Vision (Unsloth)
-- Minimal demo app with Gradio
+## Figures
+
+- **Method overview**
+
+  ![Method overview](figures/Figure1.png)
+
+- **Instruction-tuning data examples**
+
+  ![Instruction-tuning data examples](figures/Figure2.png)
+
+- **Interpretability comparison**
+
+  ![Interpretability comparison](figures/Figure3.png)
+
 
 ## Quickstart
 ```bash
@@ -21,11 +28,11 @@ This repo releases a clean, working reference for our MICCAI paper, including a 
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
-# 2) run a tiny GNN sanity-check on toy data
-python -m gft.training.train_gnn --data-dir examples/sample_data --epochs 2
+# 2) run a tiny GNN sanity-check on your data
+python -m gft.training.train_gnn --data-dir <your_data_dir> --epochs 2
 
 # 3) export IG table + synthetic Q&A (no external APIs)
-python scripts/generate_instructions.py --data-dir examples/sample_data --out instructions.jsonl
+python scripts/generate_instructions.py --data-dir <your_data_dir> --out instructions.jsonl
 
 # 4) stage 1 finetune (classification + short rationale)
 python -m gft.training.ft_stage1 --model unsloth/Llama-3.2-11B-Vision-Instruct --data instructions.jsonl --out checkpoints/stage1
@@ -49,14 +56,14 @@ src/gft
 scripts/
   generate_instructions.py
 examples/
-  sample_data/          # placeholder
   configs/default.yaml
 ```
 
 ## Notes
-- The **graph builder** here is a minimal stand-in: it splits an OCTA into tiles and extracts basic patch stats, so the whole stack runs end-to-end. Replace it with your vessel/ICA/FAZ graph when ready.
+- The **graph builder** here is a minimal stand-in: it splits an OCTA into tiles and extracts basic patch stats, so the whole stack runs end-to-end. Please see [here](https://github.com/luxtu/OCTA-graph) for the complete pipeline of graph construction.
 - Finetuning uses **Unsloth** + **TRL**. If you prefer another stack, only the wrappers need to change.
 - The demo streams tokens and accepts image + prompt.
+- You must provide your own dataset path for all commands that take `--data-dir`.
 
 ## License
 MIT
