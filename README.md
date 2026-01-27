@@ -1,7 +1,5 @@
 # GFT: Fine-tuning Vision Language Models with Graph-based Knowledge for Explainable Medical Image Analysis (MICCAI 2025)
 
-> 🔎 **New:** our latest work on **trust-in-AI for DR diagnosis from OCTA** (survey).  
-> **[[Link](https://octa-dr.streamlit.app/)]**
 
 This repo releases a clean, working reference for our MICCAI paper, including a minimal GNN pipeline, integrated-gradients attribution, instruction data synthesis, and two-stage VLM fine-tuning & demo. Please see [here](https://github.com/luxtu/OCTA-graph) for the complete pipeline of GNN training.
 
