@@ -23,6 +23,10 @@ def image_to_tiles(x, tiles=8):
             u = ids[i,j]
             if i+1<tiles: edges.append((u, ids[i+1,j]))
             if j+1<tiles: edges.append((u, ids[i,j+1]))
+    if edges:
+        edges = edges + [(v, u) for (u, v) in edges]
+    for i in range(tiles * tiles):
+        edges.append((i, i))
     x = torch.tensor(feats).float()            
     pos = torch.tensor(coords).float()         
     edge_index = torch.tensor(edges).long().t().contiguous() if edges else torch.zeros(2,0).long()

@@ -11,7 +11,9 @@ class SAGE(nn.Module):
         src, dst = edge_index
         agg = torch.zeros_like(x)
         agg.index_add_(0, dst, x[src])
-        deg = torch.zeros(x.size(0), device=x.device).index_add_(0, dst, torch.ones_like(dst, dtype=x.dtype))
+        deg = torch.zeros(x.size(0), device=x.device).index_add_(
+            0, dst, torch.ones(dst.size(0), device=x.device, dtype=x.dtype)
+        )
         deg = deg.clamp_min_(1).unsqueeze(1)
         return agg/deg
     def forward(self, x, edge_index):

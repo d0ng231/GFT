@@ -11,6 +11,7 @@ def run(args):
     fix(0)
     ds = OCTADataset(args.data_dir, split="train")
     dl = DataLoader(ds, batch_size=1, shuffle=True)
+    dl_eval = DataLoader(ds, batch_size=1, shuffle=False)
     model = SAGE(in_ch=3, hid=64, classes=3)
     opt = torch.optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-4)
     for epoch in range(args.epochs):
@@ -24,7 +25,7 @@ def run(args):
     ys, ps = [], []
     model.eval()
     with torch.no_grad():
-        for x, y, _ in dl:
+        for x, y, _ in dl_eval:
             x = x[0]
             gx, pos, edge_index = image_to_tiles(x, tiles=8)
             p = model(gx, edge_index).argmax().item()
