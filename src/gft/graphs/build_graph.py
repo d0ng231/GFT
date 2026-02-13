@@ -3,7 +3,15 @@ import numpy as np
 
 def image_to_tiles(x, tiles=8):
     # x: (1, H, W) tensor in [0,1]
+    if x.ndim != 3:
+        raise ValueError(f"Expected a 3D tensor shaped (C, H, W), got shape={tuple(x.shape)}")
+    if tiles <= 0:
+        raise ValueError(f"tiles must be a positive integer, got {tiles}")
     _, H, W = x.shape
+    if H % tiles != 0 or W % tiles != 0:
+        raise ValueError(
+            f"Image size {(H, W)} must be divisible by tiles={tiles} to avoid dropping border pixels"
+        )
     th, tw = H // tiles, W // tiles
     feats, coords, edges = [], [], []
     nid = 0

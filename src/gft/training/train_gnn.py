@@ -20,7 +20,8 @@ def run(args):
             x = x[0]
             gx, pos, edge_index = image_to_tiles(x, tiles=8)
             logit = model(gx, edge_index)
-            loss = F.cross_entropy(logit.unsqueeze(0), torch.tensor([y]))
+            target = y.view(-1).long()
+            loss = F.cross_entropy(logit.unsqueeze(0), target)
             opt.zero_grad(); loss.backward(); opt.step()
     ys, ps = [], []
     model.eval()
